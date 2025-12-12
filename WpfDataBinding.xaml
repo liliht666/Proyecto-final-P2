@@ -1,0 +1,129 @@
+﻿<Window x:Class="AzharaP2C.WpfDataBinding"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AzharaP2C"
+        mc:Ignorable="d"
+               Title="MainWindow"
+Height="450" 
+Width="500"
+ Icon="/iconos/chaqueta.png">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/fondo/fondo.jpg" Opacity="0.8"/>
+        </Grid.Background>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        
+        <Label x:Name="lblMensaje"
+               Grid.Row="4"
+               Grid.ColumnSpan="3"/>
+
+        <Label x:Name="lbltitulo"
+       Content="Productos"
+       FontSize="27"
+       FontWeight="Bold"
+       Grid.ColumnSpan="3"
+       HorizontalAlignment="Center"/>
+        <StackPanel Grid.Row="1" Grid.ColumnSpan="3
+                    ">
+            <Label x:Name="lblListaProd"
+           Content="Lista de Productos:"
+           FontSize="15"
+            FontWeight="Bold"/>
+            <ListBox x:Name="lstBProductos" 
+             Height="150"
+             ItemsSource="{Binding ListaProductos}" 
+             SelectionChanged="lstBProductos_SelectionChanged"
+             SelectedItem="{Binding productoSel}"
+             Opacity="0.4">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="{Binding Nombre}"/>
+                            <Label Content=" - "/>
+                            <Label Content="{Binding Precio}"/>
+                            <Label Content=" - "/>
+                            <Label Content="{Binding Talla}"/>
+
+
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+
+            </ListBox>
+
+        </StackPanel>
+
+        <StackPanel Grid.Row="2">
+            <Label x:Name="lblNomPrdo"
+       Content="Producto: "
+           FontSize="20"
+           FontWeight="Bold"/>
+            <TextBox x:Name="txtNomProd"
+             Height="40"
+             Text="{Binding productoSel.Nombre, Mode=TwoWay}"
+             Margin="5"
+             FontSize="15"
+           FontWeight="Bold"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Grid.Column="1">
+            <Label x:Name="lblPrecio"
+       Content="Precio: "
+           FontSize="20"
+           FontWeight="Bold"/>
+            <TextBox x:Name="txtNomPrecio"
+             Height="40"
+             Text="{Binding productoSel.Precio, Mode=TwoWay}"
+             Margin="5"
+             FontSize="15"
+           FontWeight="Bold"/>
+           
+         
+        </StackPanel>
+        <StackPanel Grid.Row="2" Grid.Column="2">
+                  <Label x:Name="lblTalla"
+                   Content="Talla"
+                    FontSize="20"
+ FontWeight="Bold"/>
+            <ComboBox x:Name="cbTalla">
+                <ComboBoxItem Content="xxs"/>
+                <ComboBoxItem Content="xs"/>
+                <ComboBoxItem Content="s"/>
+                <ComboBoxItem Content="m"/>
+                <ComboBoxItem Content="l"/>
+                <ComboBoxItem Content="xl"/>
+                <ComboBoxItem Content="xxl"/>
+
+            </ComboBox>
+        </StackPanel>
+        <Button x:Name="btnAgregar"
+        Grid.Row="3"
+        Grid.Column="2"
+        Margin="20,5"
+        FontSize="15"
+        FontWeight="Bold"
+        Content="Agregar producto" 
+        Click="btnAgregar_Click"
+        />
+        <Button x:Name="btnBorrar"
+        Grid.Row="3"
+        Margin="20,5"
+        FontSize="15"
+        FontWeight="Bold"
+        Content="Borrar Producto" Click="btnBorrar_Click" 
+        />
+    </Grid>
+</Window>
